@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Sidebar from "./components/Sidebar";
+import Sales from "./components/Sales";
+import Inventory from "./components/Inventory";
+import Customer from "./components/Customer";
+import Reporting from "./components/Reporting";
+import "./App.css";
 
 function App() {
+  const [active, setActive] = useState("Sales");
+
+  
+  let content;
+  if (active === "Sales") content = <Sales />;
+  else if (active === "Inventory") content = <Inventory />;
+  else if (active === "Customer") content = <Customer />;
+  else if (active === "Reporting") content = <Reporting />;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Sidebar setActive={setActive} />
+      <div className="content">{content}</div>
     </div>
   );
 }
